@@ -90,13 +90,13 @@ uint32_t get_ip_from_string (const std::string strIp) {
   std::array<uint8_t, 4> octets;
   int8_t octetNum = 3;
   uint32_t result = 0;
-  for (auto i = 0; i < strIp.length(); i++)
+  for (size_t i = 0; i < strIp.length(); i++)
     if (strIp.at(i) == '.') {
       octets.at(octetNum--) = stoi(strIp.substr(oldPos, i - oldPos));
       oldPos = i + 1;
     }
   octets.at(0) = stoi(strIp.substr(oldPos, strIp.length() - oldPos));
-  for (auto i = 0; i < 4; i++) {
+  for (size_t i = 0; i < 4; i++) {
     if (i > 0)
       result <<= 8;
     result += octets[3 - i];
@@ -156,7 +156,7 @@ private:
   std::condition_variable *condition_;
   bool sendersUnlocked_ = false;
   boost::asio::deadline_timer dt_;
-  const boost::posix_time::time_duration RECEIVE_TIMER_FREQUENCY = boost::posix_time::seconds(10);
+  const boost::posix_time::time_duration RECEIVE_TIMER_FREQUENCY = boost::posix_time::seconds(5);
 };
 
 class OptionsLosshd : public Options {
@@ -193,7 +193,7 @@ private:
   
   OptionsLosshd *options_;
   pqxx::connection conn_;
-  pqxx::work mutable txn_;
+  pqxx::nontransaction mutable txn_;
   std::mutex mtx_;
   std::vector<std::string> addressList_;
   std::unordered_map<uint32_t, uint32_t> pingResults_;

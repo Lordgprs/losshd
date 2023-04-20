@@ -133,7 +133,7 @@ void IcmpSender::start_send() {
   icmp.type(Icmp::ECHO_REQUEST);
   icmp.code(0);
   icmp.identifier(static_cast<uint16_t>(getpid()));
-  for (auto i = 0; i < count_; i++) {
+  for (size_t i = 0; i < count_; i++) {
     icmp.sequence_number(++sequenceNumber_);
     calculate_checksum(icmp, body.begin(), body.end());
     // Encode the request packet
@@ -152,7 +152,6 @@ void IcmpSender::start_send() {
 IcmpReceiver::IcmpReceiver(boost::asio::io_context &io_context, int *senders, std::unordered_map<uint32_t, uint32_t> *results, std::mutex *mtx, std::condition_variable *condition):
   mtx_(mtx),
   condition_(condition),
-//  dt_(io_context, boost::posix_time::seconds(5)),
   dt_(io_context, RECEIVE_TIMER_FREQUENCY),
   socket_(io_context, icmp::v4()) {
     std::unique_lock<std::mutex> ul(*mtx_);
@@ -292,9 +291,7 @@ addressList_(get_addresses_for_ping()) {
     pingResults_.insert({get_ip_from_string(address), 0});
 }
 
-Scheduler::~Scheduler() {
-  txn_.commit();
-}
+Scheduler::~Scheduler() {}
 
 void Scheduler::run() {
   std::vector<std::thread> threads;
@@ -306,7 +303,7 @@ void Scheduler::run() {
     io_context.run();
   }, &sendersCount, &pingResults_, &mtx_, &condition_);
   // Starting ICMP senders
-  for (auto i = 0; i < addressList_.size(); i++) {
+  for (size_t i = 0; i < addressList_.size(); i++) {
     std::thread t([](std::string address, int *senders, std::mutex *mtx, std::condition_variable *condition, OptionsLosshd *options){
       std::unique_lock<std::mutex> ul(*mtx);
       // Waiting for receiver starts
@@ -321,12 +318,20 @@ void Scheduler::run() {
     threads.push_back(std::move(t));
   }
   // Joining senders
-  for (int i = 0; i < threads.size(); i++)
+  for (size_t i = 0; i < threads.size(); i++)
      threads.at(i).join();
   // Joining receiver
   t.join();
-  for (auto i: pingResults_)
-    std::cout << "IP: " << get_ip_from_uint32(i.first) << " Recvd: " << i.second << std::endl;
+  std::cout << "End of collectiong results" << std::endl;
+  for (auto i: pingResults_) {
+    std::cout << "IP: " <<  get_ip_from_uint32(i.first) << " received: " << i.second << std::endl;
+    txn_.exec("UPDATE ext_packetlosshd_dbg SET \
+        loss = " + std::to_string((options_->getCount() - i.second) / options_->getCount() * 100) + ", " + 
+        "last_read = NOW(), \
+        last_update = NOW() \
+        WHERE \
+        ip = '" + get_ip_from_uint32(i.first) + "'");
+  }
   std::cout << std::endl;
 }
 
@@ -340,7 +345,7 @@ void Scheduler::clean() {
 std::vector<std::string> Scheduler::get_addresses_for_ping() const {
   std::string req = "";
   std::vector<std::string> addresses;
-  for (auto row: txn_.exec("SELECT ip FROM ext_packetlosshd LIMIT 2"))
+  for (auto row: txn_.exec("SELECT ip FROM ext_packetlosshd_dbg LIMIT 2"))
     addresses.push_back(row[0].c_str());
   return addresses;
 }
