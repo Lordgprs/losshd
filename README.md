@@ -7,6 +7,8 @@ cd build
 cmake ..
 make
 
+Don't forget to create table from file schema.sql on your PostgreSQL server!
+
 
 Dependencies:
 
