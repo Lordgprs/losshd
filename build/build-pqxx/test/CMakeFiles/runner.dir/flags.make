@@ -6,5 +6,5 @@ CXX_DEFINES =
 
 CXX_INCLUDES = -I/home/max/cpp-projects/losshd/deps -I/usr/include/postgresql -I/home/max/cpp-projects/losshd/build/build-pqxx/include -I/home/max/cpp-projects/losshd/deps/libpqxx/include
 
-CXX_FLAGS = -Wall -Wextra -O3 -std=c++17
+CXX_FLAGS = -O3 -std=c++17
 
