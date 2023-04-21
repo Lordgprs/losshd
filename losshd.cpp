@@ -145,8 +145,7 @@ void IcmpSender::start_send() {
     timeSent_ = steady_timer::clock_type::now();
     socket_.send_to(requestBuffer.data(), destination_);
     std::this_thread::sleep_for(std::chrono::milliseconds(interval_));
-  }
-  
+  } 
 }
 
 IcmpReceiver::IcmpReceiver(boost::asio::io_context &io_context, int *senders, std::unordered_map<uint32_t, uint32_t> *results, std::mutex *mtx, std::condition_variable *condition):
@@ -322,12 +321,11 @@ void Scheduler::run() {
      threads.at(i).join();
   // Joining receiver
   t.join();
-  std::cout << "End of collectiong results" << std::endl;
+  std::cout << "End of collecting results:" << std::endl;
   for (auto i: pingResults_) {
-    std::cout << "IP: " <<  get_ip_from_uint32(i.first) << " received: " << i.second << std::endl;
+    std::cout << "from IP " <<  get_ip_from_uint32(i.first) << " received: " << i.second << std::endl;
     txn_.exec("UPDATE ext_packetlosshd_dbg SET \
-        loss = " + std::to_string((options_->getCount() - i.second) / options_->getCount() * 100) + ", " + 
-        "last_read = NOW(), \
+        loss = " + std::to_string((options_->getCount() - i.second) / options_->getCount() * 100) + ", " + " \
         last_update = NOW() \
         WHERE \
         ip = '" + get_ip_from_uint32(i.first) + "'");
@@ -345,7 +343,7 @@ void Scheduler::clean() {
 std::vector<std::string> Scheduler::get_addresses_for_ping() const {
   std::string req = "";
   std::vector<std::string> addresses;
-  for (auto row: txn_.exec("SELECT ip FROM ext_packetlosshd_dbg LIMIT 2"))
+  for (auto row: txn_.exec("SELECT ip FROM ext_packetlosshd_dbg LIMIT 100"))
     addresses.push_back(row[0].c_str());
   return addresses;
 }
@@ -386,10 +384,10 @@ int main(int argc, char *argv[]) {
   }
   Scheduler scheduler(&options);
   while (true) {
-    std::cout << "New iteration" << std::endl;
+    std::cout << "New iteration started. Pinging hosts..." << std::endl;
     scheduler.run();
     scheduler.clean();
     std::this_thread::sleep_for(PAUSE_BETWEEN_ITERATIONS);
   }
-  return 0;
+  return EXIT_SUCCESS;
 }

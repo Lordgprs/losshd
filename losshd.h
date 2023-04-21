@@ -51,12 +51,8 @@ public:
   void checksum(uint16_t);
   void identifier(uint16_t);
   void sequence_number(uint16_t);
-  friend std::istream& operator>>(std::istream &inputStream, Icmp &header);/* {
-    return inputStream.read(reinterpret_cast<char *>(header.data_), 8);
-  }*/
-  friend std::ostream& operator<<(std::ostream &outputStream, const Icmp &header);/* {
-    return outputStream.write(reinterpret_cast<const char *>(header.data_), 8);
-  }*/
+  friend std::istream& operator>>(std::istream &inputStream, Icmp &header);
+  friend std::ostream& operator<<(std::ostream &outputStream, const Icmp &header);
 
 private:
   uint16_t decode(int32_t a, int32_t b) const {

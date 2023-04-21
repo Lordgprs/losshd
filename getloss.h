@@ -2,6 +2,7 @@
 #define LOSSHD_GETLOSS_H
 
 #include "options.h"
+#include <pqxx/pqxx>
 
 class OptionsGetloss : public Options {
 public:
