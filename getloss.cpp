@@ -72,8 +72,7 @@ double Database::getLoss(std::string ip) const {
   }
   else 
     txn_.exec("INSERT INTO ext_packetlosshd_dbg (ip) VALUES ('" + ip + "')");
-  txn_.exec("DELETE FROM ext_packetlosshd_dbg WHERE last_read + interval '180 days' < NOW()");
-  txn_.commit();
+  txn_.exec("DELETE FROM ext_packetlosshd_dbg WHERE last_read + interval '7 days' < NOW()");
   return loss;
 }
 

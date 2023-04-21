@@ -325,7 +325,7 @@ void Scheduler::run() {
   for (auto i: pingResults_) {
     std::cout << "from IP " <<  get_ip_from_uint32(i.first) << " received: " << i.second << std::endl;
     txn_.exec("UPDATE ext_packetlosshd_dbg SET \
-        loss = " + std::to_string((options_->getCount() - i.second) / options_->getCount() * 100) + ", " + " \
+        loss = " + std::to_string(static_cast<double>(options_->getCount() - i.second) / options_->getCount() * 100) + ", " + " \
         last_update = NOW() \
         WHERE \
         ip = '" + get_ip_from_uint32(i.first) + "'");
