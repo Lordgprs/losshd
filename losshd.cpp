@@ -343,6 +343,7 @@ void Scheduler::clean() {
 std::vector<std::string> Scheduler::get_addresses_for_ping() const {
   std::string req = "";
   std::vector<std::string> addresses;
+  txn_.exec("DELETE FROM ext_packetlosshd_dbg WHERE last_read + interval '7 days' < NOW()");
   for (auto row: txn_.exec("SELECT ip FROM ext_packetlosshd_dbg LIMIT 100"))
     addresses.push_back(row[0].c_str());
   return addresses;
