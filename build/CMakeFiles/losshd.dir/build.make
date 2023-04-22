@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/max/cpp-projects/losshd
+CMAKE_SOURCE_DIR = /home/max/cpp-projects/losshd-1.0.1
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/max/cpp-projects/losshd/build
+CMAKE_BINARY_DIR = /home/max/cpp-projects/losshd-1.0.1/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/losshd.dir/depend.make
@@ -72,30 +72,30 @@ include CMakeFiles/losshd.dir/flags.make
 CMakeFiles/losshd.dir/losshd.cpp.o: CMakeFiles/losshd.dir/flags.make
 CMakeFiles/losshd.dir/losshd.cpp.o: ../losshd.cpp
 CMakeFiles/losshd.dir/losshd.cpp.o: CMakeFiles/losshd.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/max/cpp-projects/losshd/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/losshd.dir/losshd.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/losshd.dir/losshd.cpp.o -MF CMakeFiles/losshd.dir/losshd.cpp.o.d -o CMakeFiles/losshd.dir/losshd.cpp.o -c /home/max/cpp-projects/losshd/losshd.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/max/cpp-projects/losshd-1.0.1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/losshd.dir/losshd.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/losshd.dir/losshd.cpp.o -MF CMakeFiles/losshd.dir/losshd.cpp.o.d -o CMakeFiles/losshd.dir/losshd.cpp.o -c /home/max/cpp-projects/losshd-1.0.1/losshd.cpp
 
 CMakeFiles/losshd.dir/losshd.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/losshd.dir/losshd.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/max/cpp-projects/losshd/losshd.cpp > CMakeFiles/losshd.dir/losshd.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/max/cpp-projects/losshd-1.0.1/losshd.cpp > CMakeFiles/losshd.dir/losshd.cpp.i
 
 CMakeFiles/losshd.dir/losshd.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/losshd.dir/losshd.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/max/cpp-projects/losshd/losshd.cpp -o CMakeFiles/losshd.dir/losshd.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/max/cpp-projects/losshd-1.0.1/losshd.cpp -o CMakeFiles/losshd.dir/losshd.cpp.s
 
 CMakeFiles/losshd.dir/options.cpp.o: CMakeFiles/losshd.dir/flags.make
 CMakeFiles/losshd.dir/options.cpp.o: ../options.cpp
 CMakeFiles/losshd.dir/options.cpp.o: CMakeFiles/losshd.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/max/cpp-projects/losshd/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/losshd.dir/options.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/losshd.dir/options.cpp.o -MF CMakeFiles/losshd.dir/options.cpp.o.d -o CMakeFiles/losshd.dir/options.cpp.o -c /home/max/cpp-projects/losshd/options.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/max/cpp-projects/losshd-1.0.1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/losshd.dir/options.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/losshd.dir/options.cpp.o -MF CMakeFiles/losshd.dir/options.cpp.o.d -o CMakeFiles/losshd.dir/options.cpp.o -c /home/max/cpp-projects/losshd-1.0.1/options.cpp
 
 CMakeFiles/losshd.dir/options.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/losshd.dir/options.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/max/cpp-projects/losshd/options.cpp > CMakeFiles/losshd.dir/options.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/max/cpp-projects/losshd-1.0.1/options.cpp > CMakeFiles/losshd.dir/options.cpp.i
 
 CMakeFiles/losshd.dir/options.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/losshd.dir/options.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/max/cpp-projects/losshd/options.cpp -o CMakeFiles/losshd.dir/options.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/max/cpp-projects/losshd-1.0.1/options.cpp -o CMakeFiles/losshd.dir/options.cpp.s
 
 # Object files for target losshd
 losshd_OBJECTS = \
@@ -108,10 +108,8 @@ losshd_EXTERNAL_OBJECTS =
 losshd: CMakeFiles/losshd.dir/losshd.cpp.o
 losshd: CMakeFiles/losshd.dir/options.cpp.o
 losshd: CMakeFiles/losshd.dir/build.make
-losshd: build-pqxx/src/libpqxx-7.8.a
-losshd: /usr/lib/x86_64-linux-gnu/libpq.so
 losshd: CMakeFiles/losshd.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/max/cpp-projects/losshd/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable losshd"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/max/cpp-projects/losshd-1.0.1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable losshd"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/losshd.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -123,6 +121,6 @@ CMakeFiles/losshd.dir/clean:
 .PHONY : CMakeFiles/losshd.dir/clean
 
 CMakeFiles/losshd.dir/depend:
-	cd /home/max/cpp-projects/losshd/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/max/cpp-projects/losshd /home/max/cpp-projects/losshd /home/max/cpp-projects/losshd/build /home/max/cpp-projects/losshd/build /home/max/cpp-projects/losshd/build/CMakeFiles/losshd.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/max/cpp-projects/losshd-1.0.1/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/max/cpp-projects/losshd-1.0.1 /home/max/cpp-projects/losshd-1.0.1 /home/max/cpp-projects/losshd-1.0.1/build /home/max/cpp-projects/losshd-1.0.1/build /home/max/cpp-projects/losshd-1.0.1/build/CMakeFiles/losshd.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/losshd.dir/depend
 

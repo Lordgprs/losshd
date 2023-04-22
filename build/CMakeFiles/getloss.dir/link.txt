@@ -1,1 +1,1 @@
-/usr/bin/c++ -O3 CMakeFiles/getloss.dir/getloss.cpp.o CMakeFiles/getloss.dir/options.cpp.o -o getloss  build-pqxx/src/libpqxx-7.8.a -lboost_program_options /usr/lib/x86_64-linux-gnu/libpq.so 
+/usr/bin/c++ -O3 -O3 -DNDEBUG -m64 CMakeFiles/getloss.dir/getloss.cpp.o CMakeFiles/getloss.dir/options.cpp.o -o getloss  -lboost_program_options -lpqxx 

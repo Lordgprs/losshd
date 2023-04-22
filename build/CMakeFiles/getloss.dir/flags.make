@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/max/cpp-projects/losshd/deps -I/home/max/cpp-projects/losshd/build/build-pqxx/include -I/home/max/cpp-projects/losshd/deps/libpqxx/include
+CXX_INCLUDES = 
 
-CXX_FLAGS = -O3 -std=c++20
+CXX_FLAGS = -O3 -O3 -DNDEBUG -std=c++20
 
