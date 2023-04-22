@@ -1,4 +1,4 @@
-project(LossHD)
+project(LossHD VERSION "1.0.0")
 cmake_minimum_required(VERSION 3.18)
 set(CMAKE_CXX_FLAGS "-O3")
 include_directories(deps)
