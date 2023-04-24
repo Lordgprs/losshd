@@ -1,0 +1,9 @@
+{
+    "version": 4,
+    "vendor": {
+        "conan": {}
+    },
+    "include": [
+        "/home/max/cpp-projects/losshd-1.0.1/conan/CMakePresets.json"
+    ]
+}

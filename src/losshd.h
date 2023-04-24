@@ -117,7 +117,7 @@ public:
   IcmpSender(const IcmpSender &&) = delete;
   IcmpSender & operator=(const IcmpSender &) = delete;
   IcmpSender & operator=(const IcmpSender &&) = delete;
-  IcmpSender(boost::asio::io_context &, const char *, uint16_t, uint16_t, std::mutex *, std::condition_variable *);
+  IcmpSender(boost::asio::io_context &, const char *, uint16_t, uint16_t, std::mutex &, std::condition_variable &);
   uint16_t received() const;
   uint16_t sent() const;
 
@@ -135,8 +135,8 @@ private:
   std::size_t requestsCount_;
   std::size_t interval_;
   std::size_t size_;
-  std::mutex *mtx_;
-  std::condition_variable *condition_;
+  std::mutex &mtx_;
+  std::condition_variable &condition_;
 };
 
 class IcmpReceiver {
@@ -146,7 +146,7 @@ public:
   IcmpReceiver(const IcmpReceiver &&) = delete;
   IcmpReceiver & operator=(const IcmpReceiver &) = delete;
   IcmpReceiver & operator=(const IcmpReceiver &&) = delete;
-  IcmpReceiver(boost::asio::io_context &, int *, std::unordered_map<uint32_t, uint32_t> *, std::mutex *, std::condition_variable *);
+  IcmpReceiver(boost::asio::io_context &, int &, std::unordered_map<uint32_t, uint32_t> &, std::mutex &, std::condition_variable &);
 
 private:
   void start_receive();
@@ -156,10 +156,10 @@ private:
   icmp::socket socket_;
   chrono::steady_clock::time_point timeSent_;
   boost::asio::streambuf replyBuffer_;
-  int *sendersCount_;
-  std::unordered_map<uint32_t, uint32_t> *pingResults_;
-  std::mutex *mtx_;
-  std::condition_variable *condition_;
+  int &sendersCount_;
+  std::unordered_map<uint32_t, uint32_t> &pingResults_;
+  std::mutex &mtx_;
+  std::condition_variable &condition_;
   bool sendersUnlocked_ = false;
   boost::asio::deadline_timer dt_;
   const boost::posix_time::time_duration RECEIVE_TIMER_FREQUENCY = boost::posix_time::seconds(5);
@@ -188,7 +188,7 @@ private:
 
 class Scheduler {
 public:
-  Scheduler(OptionsLosshd *);
+  Scheduler(OptionsLosshd &);
   ~Scheduler();
   void run();
   void clean();
@@ -199,7 +199,7 @@ private:
   auto createReceiver(); 
   auto createSender(); 
   
-  OptionsLosshd *options_;
+  OptionsLosshd &options_;
   pqxx::connection conn_;
   pqxx::nontransaction mutable txn_;
   std::mutex mtx_;

@@ -91,7 +91,7 @@ std::istream &operator>>(std::istream &is, Ipv4 &header) {
   return is;
 }
 
-IcmpSender::IcmpSender(boost::asio::io_context &io_context, const char *destination, uint16_t count, uint16_t interval, std::mutex *mtx, std::condition_variable *condition):
+IcmpSender::IcmpSender(boost::asio::io_context &io_context, const char *destination, uint16_t count, uint16_t interval, std::mutex &mtx, std::condition_variable &condition):
   sequenceNumber_(0),
   numReplies_(0),
   repliesCount_(0),
@@ -137,39 +137,41 @@ void IcmpSender::start_send() {
   } 
 }
 
-IcmpReceiver::IcmpReceiver(boost::asio::io_context &io_context, int *senders, std::unordered_map<uint32_t, uint32_t> *results, std::mutex *mtx, std::condition_variable *condition):
+IcmpReceiver::IcmpReceiver(boost::asio::io_context &io_context, int &senders, std::unordered_map<uint32_t, uint32_t> &results, std::mutex &mtx, std::condition_variable &condition):
   mtx_(mtx),
   condition_(condition),
   dt_(io_context, RECEIVE_TIMER_FREQUENCY),
+  sendersCount_(senders),
+  pingResults_(results),
   socket_(io_context, icmp::v4()) {
-    std::unique_lock<std::mutex> ul(*mtx_);
+    /*std::unique_lock<std::mutex> ul(mtx_);
     sendersCount_ = senders;
     pingResults_ = results;
-    mtx_->unlock();
+    mtx_.unlock();*/
     start_receive();
   }
   
 void IcmpReceiver::start_receive() {
   // Discard any data already in the buffer
   replyBuffer_.consume(replyBuffer_.size());
-  if ((!sendersUnlocked_) || (sendersUnlocked_ && *sendersCount_ > 0)) {
+  if ((!sendersUnlocked_) || (sendersUnlocked_ && sendersCount_ > 0)) {
     socket_.async_receive(replyBuffer_.prepare(65536),
       boost::bind(&IcmpReceiver::handle_receive, this, boost::placeholders::_2));
     dt_.async_wait(boost::bind(&IcmpReceiver::check_if_senders_exist, this));
   }
   if (!sendersUnlocked_) {
-    std::unique_lock<std::mutex> ul(*mtx_);
+    std::unique_lock<std::mutex> ul(mtx_);
     // Notifying senders: we are ready to catch echo replies
-    condition_->notify_all();
-    mtx_->unlock();
+    condition_.notify_all();
+    mtx_.unlock();
     sendersUnlocked_ = true;
   }
 }
 
 void IcmpReceiver::check_if_senders_exist() {
-  std::unique_lock<std::mutex> ul(*mtx_);
-  auto count = *sendersCount_;
-  mtx_->unlock();
+  std::unique_lock<std::mutex> ul(mtx_);
+  auto count = sendersCount_;
+  mtx_.unlock();
   // Stopping catching replies if all senders have been finished
   if (count == 0) {
     dt_.cancel();
@@ -178,8 +180,8 @@ void IcmpReceiver::check_if_senders_exist() {
 }
 
 void IcmpReceiver::handle_receive(std::size_t length) {
-  std::unique_lock<std::mutex> ul(*mtx_);
-  mtx_->unlock();
+  std::unique_lock<std::mutex> ul(mtx_);
+  mtx_.unlock();
   replyBuffer_.commit(length);
   
   // Decode the reply packet
@@ -191,15 +193,15 @@ void IcmpReceiver::handle_receive(std::size_t length) {
   && icmp.identifier() == getpid()) {
     dt_.cancel();
     uint32_t src = ipv4.source_address_uint32();
-    mtx_->lock();
-    pingResults_->at(src)++;
-    mtx_->unlock();
+    mtx_.lock();
+    pingResults_[src]++;
+    mtx_.unlock();
   }
-  mtx_->lock();
-  if(*sendersCount_ > 0) {
+  mtx_.lock();
+  if(sendersCount_ > 0) {
     start_receive();
   }
-  mtx_->unlock();
+  mtx_.unlock();
 }
 
 OptionsLosshd::OptionsLosshd (int argc, char *argv[]):
@@ -271,9 +273,9 @@ bool OptionsLosshd::isDaemon() const {
   return false;
 }
 
-Scheduler::Scheduler(OptionsLosshd *options):
+Scheduler::Scheduler(OptionsLosshd &options):
 options_(options),
-conn_("dbname=" + options->getDbname() + " user=" + options->getDbuser() + " password=" + options->getDbpass() + " hostaddr=" + options->getDbhost()), txn_(conn_),
+conn_("dbname=" + options.getDbname() + " user=" + options.getDbuser() + " password=" + options.getDbpass() + " hostaddr=" + options.getDbhost()), txn_(conn_),
 addressList_(get_addresses_for_ping()) {
   for (auto address: addressList_)
     pingResults_.insert({get_ip_from_string(address), 0});
@@ -282,7 +284,7 @@ addressList_(get_addresses_for_ping()) {
 Scheduler::~Scheduler() {}
 
 auto Scheduler::createReceiver() {
-  return [](int *senders, std::unordered_map<uint32_t, uint32_t> *results, std::mutex *mtx, std::condition_variable *condition) {
+  return [](int &senders, std::unordered_map<uint32_t, uint32_t> &results, std::mutex &mtx, std::condition_variable &condition) {
     boost::asio::io_context io_context;
     IcmpReceiver pinger(io_context, senders, results, mtx, condition);
     io_context.run();
@@ -290,16 +292,16 @@ auto Scheduler::createReceiver() {
 }
 
 auto Scheduler::createSender() {
-  return [](std::string address, int *senders, std::mutex *mtx, std::condition_variable *condition, OptionsLosshd *options){
-    std::unique_lock<std::mutex> ul(*mtx);
+  return [](std::string address, int &senders, std::mutex &mtx, std::condition_variable &condition, OptionsLosshd &options){
+    std::unique_lock<std::mutex> ul(mtx);
     // Waiting for receiver starts
-    condition->wait(ul);
-    mtx->unlock();
+    condition.wait(ul);
+    mtx.unlock();
     boost::asio::io_context io_context;
-    IcmpSender pinger(io_context, address.c_str(), options->getCount(), options->getInterval(), mtx, condition);
-    mtx->lock();
-    (*senders)--;
-    mtx->unlock();
+    IcmpSender pinger(io_context, address.c_str(), options.getCount(), options.getInterval(), mtx, condition);
+    mtx.lock();
+    senders--;
+    mtx.unlock();
   };
 }
 
@@ -307,10 +309,10 @@ void Scheduler::run() {
   std::vector<std::thread> threads;
   int sendersCount = addressList_.size();
   // Starting ICMP receiver
-  std::thread t(createReceiver(), &sendersCount, &pingResults_, &mtx_, &condition_);
+  std::thread t(createReceiver(), std::ref(sendersCount), std::ref(pingResults_), std::ref(mtx_), std::ref(condition_));
   // Starting ICMP senders
   for (size_t i = 0; i < addressList_.size(); i++) {
-    std::thread t(createSender(), addressList_.at(i), &sendersCount, &mtx_, &condition_, options_);
+    std::thread t(createSender(), addressList_[i], std::ref(sendersCount), std::ref(mtx_), std::ref(condition_), std::ref(options_));
     threads.push_back(std::move(t));
   }
   // Joining senders
@@ -322,7 +324,7 @@ void Scheduler::run() {
   for (auto i: pingResults_) {
     std::cout << "from IP " <<  get_ip_from_uint32(i.first) << " received: " << i.second << std::endl;
     txn_.exec("UPDATE ext_packetlosshd_dbg SET \
-        loss = " + std::to_string(static_cast<double>(options_->getCount() - i.second) / options_->getCount() * 100) + ", " + " \
+        loss = " + std::to_string(static_cast<double>(options_.getCount() - i.second) / options_.getCount() * 100) + ", " + " \
         last_update = NOW() \
         WHERE \
         ip = '" + get_ip_from_uint32(i.first) + "'");
@@ -375,12 +377,15 @@ int main(int argc, char *argv[]) {
     }
     umask(0);
     setsid();
-    chdir("/");
+    if (chdir("/") < 0) {
+      std::cerr << "Error while attempting chdir()!" << std::endl;
+      return EXIT_FAILURE;
+    };
     close(STDIN_FILENO);
     close(STDOUT_FILENO);
     close(STDERR_FILENO);
   }
-  Scheduler scheduler(&options);
+  Scheduler scheduler(options);
   while (true) {
     std::cout << "New iteration started. Pinging hosts..." << std::endl;
     scheduler.run();

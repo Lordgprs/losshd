@@ -25,9 +25,9 @@ public:
 class Database {
 public:
   Database() = delete;
-  Database(const OptionsGetloss *);
+  Database(const OptionsGetloss &);
   ~Database();
-  double getLoss(std::string) const;
+  double getLoss(const std::string &) const;
 private:
   pqxx::connection conn_;
   pqxx::work mutable txn_;

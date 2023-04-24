@@ -52,14 +52,14 @@ std::string OptionsGetloss::getAddress() const {
   return vm_.at("address").as<std::string>();
 }
 
-Database::Database(const OptionsGetloss *options):
-conn_("dbname=" + options->getDbname() + " user=" + options->getDbuser() + " password=" + options->getDbpass() + " hostaddr=" + options->getDbhost()), txn_(conn_) {
+Database::Database(const OptionsGetloss &options):
+conn_("dbname=" + options.getDbname() + " user=" + options.getDbuser() + " password=" + options.getDbpass() + " hostaddr=" + options.getDbhost()), txn_(conn_) {
   
 }
 Database::~Database() {
   txn_.commit();
 }
-double Database::getLoss(std::string ip) const {
+double Database::getLoss(const std::string &ip) const {
   double loss = 0;
   std::string req = "SELECT loss FROM ext_packetlosshd_dbg WHERE ip = '" + ip + "'";
   auto result = txn_.exec(req);
@@ -74,7 +74,7 @@ double Database::getLoss(std::string ip) const {
 
 int main(int argc, char **argv) {
   OptionsGetloss options(argc, argv);
-  Database db(&options);
+  Database db(options);
   std::cout << db.getLoss(options.getAddress()) << std::endl;
   return EXIT_SUCCESS;
 }

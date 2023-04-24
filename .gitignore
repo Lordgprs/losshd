@@ -1,0 +1,6 @@
+*.cmake
+*.sh
+conan/*
+build/*
+*.txt
+!CMakeLists.txt
