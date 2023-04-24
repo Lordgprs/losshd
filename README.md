@@ -5,9 +5,8 @@ Build:
 
 
 cd build
-
-cmake .. -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake -DCMAKE_BUILD_TYPE=Release
-
+conan install .. -of ../conan
+cmake .. -DCMAKE_TOOLCHAIN_FILE=../conan/conan_toolchain.cmake -DCMAKE_BUILD_TYPE=Release
 cmake --build .
 
 

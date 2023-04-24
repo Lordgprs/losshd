@@ -1,6 +1,4 @@
 /home/max/cpp-projects/losshd-1.0.1/build/CMakeFiles/losshd.dir
 /home/max/cpp-projects/losshd-1.0.1/build/CMakeFiles/getloss.dir
-/home/max/cpp-projects/losshd-1.0.1/build/CMakeFiles/package.dir
-/home/max/cpp-projects/losshd-1.0.1/build/CMakeFiles/package_source.dir
 /home/max/cpp-projects/losshd-1.0.1/build/CMakeFiles/edit_cache.dir
 /home/max/cpp-projects/losshd-1.0.1/build/CMakeFiles/rebuild_cache.dir

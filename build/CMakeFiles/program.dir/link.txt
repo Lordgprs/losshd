@@ -1,1 +1,0 @@
-/usr/bin/c++ CMakeFiles/program.dir/main.cpp.o CMakeFiles/program.dir/options.cpp.o -o program  -lpqxx -lpq -lboost_program_options 
