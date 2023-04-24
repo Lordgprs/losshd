@@ -8,8 +8,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/max/cpp-projects/losshd-1.0.1/losshd.cpp" "CMakeFiles/losshd.dir/losshd.cpp.o" "gcc" "CMakeFiles/losshd.dir/losshd.cpp.o.d"
-  "/home/max/cpp-projects/losshd-1.0.1/options.cpp" "CMakeFiles/losshd.dir/options.cpp.o" "gcc" "CMakeFiles/losshd.dir/options.cpp.o.d"
+  "/home/max/cpp-projects/losshd-1.0.1/src/losshd.cpp" "CMakeFiles/losshd.dir/src/losshd.cpp.o" "gcc" "CMakeFiles/losshd.dir/src/losshd.cpp.o.d"
+  "/home/max/cpp-projects/losshd-1.0.1/src/options.cpp" "CMakeFiles/losshd.dir/src/options.cpp.o" "gcc" "CMakeFiles/losshd.dir/src/options.cpp.o.d"
   )
 
 # Targets to which this target links.

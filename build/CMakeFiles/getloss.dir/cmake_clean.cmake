@@ -1,8 +1,8 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/getloss.dir/getloss.cpp.o"
-  "CMakeFiles/getloss.dir/getloss.cpp.o.d"
-  "CMakeFiles/getloss.dir/options.cpp.o"
-  "CMakeFiles/getloss.dir/options.cpp.o.d"
+  "CMakeFiles/getloss.dir/src/getloss.cpp.o"
+  "CMakeFiles/getloss.dir/src/getloss.cpp.o.d"
+  "CMakeFiles/getloss.dir/src/options.cpp.o"
+  "CMakeFiles/getloss.dir/src/options.cpp.o.d"
   "getloss"
   "getloss.pdb"
 )

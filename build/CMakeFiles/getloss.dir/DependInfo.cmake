@@ -8,8 +8,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/max/cpp-projects/losshd-1.0.1/getloss.cpp" "CMakeFiles/getloss.dir/getloss.cpp.o" "gcc" "CMakeFiles/getloss.dir/getloss.cpp.o.d"
-  "/home/max/cpp-projects/losshd-1.0.1/options.cpp" "CMakeFiles/getloss.dir/options.cpp.o" "gcc" "CMakeFiles/getloss.dir/options.cpp.o.d"
+  "/home/max/cpp-projects/losshd-1.0.1/src/getloss.cpp" "CMakeFiles/getloss.dir/src/getloss.cpp.o" "gcc" "CMakeFiles/getloss.dir/src/getloss.cpp.o.d"
+  "/home/max/cpp-projects/losshd-1.0.1/src/options.cpp" "CMakeFiles/getloss.dir/src/options.cpp.o" "gcc" "CMakeFiles/getloss.dir/src/options.cpp.o.d"
   )
 
 # Targets to which this target links.

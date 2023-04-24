@@ -1,1 +1,1 @@
-/usr/bin/c++ -O2 -O3 -DNDEBUG -m64 CMakeFiles/losshd.dir/losshd.cpp.o CMakeFiles/losshd.dir/options.cpp.o -o losshd  -lboost_program_options -lpqxx 
+/usr/bin/c++ -O2 -O3 -DNDEBUG -m64 CMakeFiles/losshd.dir/src/losshd.cpp.o CMakeFiles/losshd.dir/src/options.cpp.o -o losshd  -lboost_program_options -lpqxx 

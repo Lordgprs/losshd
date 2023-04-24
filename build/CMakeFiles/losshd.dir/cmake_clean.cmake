@@ -1,8 +1,8 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/losshd.dir/losshd.cpp.o"
-  "CMakeFiles/losshd.dir/losshd.cpp.o.d"
-  "CMakeFiles/losshd.dir/options.cpp.o"
-  "CMakeFiles/losshd.dir/options.cpp.o.d"
+  "CMakeFiles/losshd.dir/src/losshd.cpp.o"
+  "CMakeFiles/losshd.dir/src/losshd.cpp.o.d"
+  "CMakeFiles/losshd.dir/src/options.cpp.o"
+  "CMakeFiles/losshd.dir/src/options.cpp.o.d"
   "losshd"
   "losshd.pdb"
 )

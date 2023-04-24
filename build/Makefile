@@ -162,80 +162,80 @@ getloss/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/getloss.dir/build.make CMakeFiles/getloss.dir/build
 .PHONY : getloss/fast
 
-getloss.o: getloss.cpp.o
-.PHONY : getloss.o
+src/getloss.o: src/getloss.cpp.o
+.PHONY : src/getloss.o
 
 # target to build an object file
-getloss.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/getloss.dir/build.make CMakeFiles/getloss.dir/getloss.cpp.o
-.PHONY : getloss.cpp.o
+src/getloss.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/getloss.dir/build.make CMakeFiles/getloss.dir/src/getloss.cpp.o
+.PHONY : src/getloss.cpp.o
 
-getloss.i: getloss.cpp.i
-.PHONY : getloss.i
+src/getloss.i: src/getloss.cpp.i
+.PHONY : src/getloss.i
 
 # target to preprocess a source file
-getloss.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/getloss.dir/build.make CMakeFiles/getloss.dir/getloss.cpp.i
-.PHONY : getloss.cpp.i
+src/getloss.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/getloss.dir/build.make CMakeFiles/getloss.dir/src/getloss.cpp.i
+.PHONY : src/getloss.cpp.i
 
-getloss.s: getloss.cpp.s
-.PHONY : getloss.s
+src/getloss.s: src/getloss.cpp.s
+.PHONY : src/getloss.s
 
 # target to generate assembly for a file
-getloss.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/getloss.dir/build.make CMakeFiles/getloss.dir/getloss.cpp.s
-.PHONY : getloss.cpp.s
+src/getloss.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/getloss.dir/build.make CMakeFiles/getloss.dir/src/getloss.cpp.s
+.PHONY : src/getloss.cpp.s
 
-losshd.o: losshd.cpp.o
-.PHONY : losshd.o
+src/losshd.o: src/losshd.cpp.o
+.PHONY : src/losshd.o
 
 # target to build an object file
-losshd.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/losshd.dir/build.make CMakeFiles/losshd.dir/losshd.cpp.o
-.PHONY : losshd.cpp.o
+src/losshd.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/losshd.dir/build.make CMakeFiles/losshd.dir/src/losshd.cpp.o
+.PHONY : src/losshd.cpp.o
 
-losshd.i: losshd.cpp.i
-.PHONY : losshd.i
+src/losshd.i: src/losshd.cpp.i
+.PHONY : src/losshd.i
 
 # target to preprocess a source file
-losshd.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/losshd.dir/build.make CMakeFiles/losshd.dir/losshd.cpp.i
-.PHONY : losshd.cpp.i
+src/losshd.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/losshd.dir/build.make CMakeFiles/losshd.dir/src/losshd.cpp.i
+.PHONY : src/losshd.cpp.i
 
-losshd.s: losshd.cpp.s
-.PHONY : losshd.s
+src/losshd.s: src/losshd.cpp.s
+.PHONY : src/losshd.s
 
 # target to generate assembly for a file
-losshd.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/losshd.dir/build.make CMakeFiles/losshd.dir/losshd.cpp.s
-.PHONY : losshd.cpp.s
+src/losshd.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/losshd.dir/build.make CMakeFiles/losshd.dir/src/losshd.cpp.s
+.PHONY : src/losshd.cpp.s
 
-options.o: options.cpp.o
-.PHONY : options.o
+src/options.o: src/options.cpp.o
+.PHONY : src/options.o
 
 # target to build an object file
-options.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/losshd.dir/build.make CMakeFiles/losshd.dir/options.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/getloss.dir/build.make CMakeFiles/getloss.dir/options.cpp.o
-.PHONY : options.cpp.o
+src/options.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/losshd.dir/build.make CMakeFiles/losshd.dir/src/options.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/getloss.dir/build.make CMakeFiles/getloss.dir/src/options.cpp.o
+.PHONY : src/options.cpp.o
 
-options.i: options.cpp.i
-.PHONY : options.i
+src/options.i: src/options.cpp.i
+.PHONY : src/options.i
 
 # target to preprocess a source file
-options.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/losshd.dir/build.make CMakeFiles/losshd.dir/options.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/getloss.dir/build.make CMakeFiles/getloss.dir/options.cpp.i
-.PHONY : options.cpp.i
+src/options.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/losshd.dir/build.make CMakeFiles/losshd.dir/src/options.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/getloss.dir/build.make CMakeFiles/getloss.dir/src/options.cpp.i
+.PHONY : src/options.cpp.i
 
-options.s: options.cpp.s
-.PHONY : options.s
+src/options.s: src/options.cpp.s
+.PHONY : src/options.s
 
 # target to generate assembly for a file
-options.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/losshd.dir/build.make CMakeFiles/losshd.dir/options.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/getloss.dir/build.make CMakeFiles/getloss.dir/options.cpp.s
-.PHONY : options.cpp.s
+src/options.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/losshd.dir/build.make CMakeFiles/losshd.dir/src/options.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/getloss.dir/build.make CMakeFiles/getloss.dir/src/options.cpp.s
+.PHONY : src/options.cpp.s
 
 # Help Target
 help:
@@ -249,15 +249,15 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... getloss"
 	@echo "... losshd"
-	@echo "... getloss.o"
-	@echo "... getloss.i"
-	@echo "... getloss.s"
-	@echo "... losshd.o"
-	@echo "... losshd.i"
-	@echo "... losshd.s"
-	@echo "... options.o"
-	@echo "... options.i"
-	@echo "... options.s"
+	@echo "... src/getloss.o"
+	@echo "... src/getloss.i"
+	@echo "... src/getloss.s"
+	@echo "... src/losshd.o"
+	@echo "... src/losshd.i"
+	@echo "... src/losshd.s"
+	@echo "... src/options.o"
+	@echo "... src/options.i"
+	@echo "... src/options.s"
 .PHONY : help
 
 
