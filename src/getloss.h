@@ -1,8 +1,10 @@
 #ifndef LOSSHD_GETLOSS_H
 #define LOSSHD_GETLOSS_H
 
-#include "options.h"
+#include <iostream>
+#include <boost/program_options.hpp>
 #include <pqxx/pqxx>
+#include "options.h"
 
 class OptionsGetloss : public Options {
 public:

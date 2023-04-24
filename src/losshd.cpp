@@ -1,14 +1,3 @@
-#include <boost/asio.hpp>
-#include <boost/bind/bind.hpp>
-#include <boost/program_options.hpp>
-#include <pqxx/pqxx>
-#include <istream>
-#include <iostream>
-#include <ostream>
-#include <thread>
-#include <map>
-
-#include "options.h"
 #include "losshd.h"
 
 Ipv4::Ipv4() {
@@ -292,28 +281,36 @@ addressList_(get_addresses_for_ping()) {
 
 Scheduler::~Scheduler() {}
 
+auto Scheduler::createReceiver() {
+  return [](int *senders, std::unordered_map<uint32_t, uint32_t> *results, std::mutex *mtx, std::condition_variable *condition) {
+    boost::asio::io_context io_context;
+    IcmpReceiver pinger(io_context, senders, results, mtx, condition);
+    io_context.run();
+  };
+}
+
+auto Scheduler::createSender() {
+  return [](std::string address, int *senders, std::mutex *mtx, std::condition_variable *condition, OptionsLosshd *options){
+    std::unique_lock<std::mutex> ul(*mtx);
+    // Waiting for receiver starts
+    condition->wait(ul);
+    mtx->unlock();
+    boost::asio::io_context io_context;
+    IcmpSender pinger(io_context, address.c_str(), options->getCount(), options->getInterval(), mtx, condition);
+    mtx->lock();
+    (*senders)--;
+    mtx->unlock();
+  };
+}
+
 void Scheduler::run() {
   std::vector<std::thread> threads;
   int sendersCount = addressList_.size();
   // Starting ICMP receiver
-  std::thread t([](int *senders, std::unordered_map<uint32_t, uint32_t> *results, std::mutex *mtx, std::condition_variable *condition) {
-    boost::asio::io_context io_context;
-    IcmpReceiver pinger(io_context, senders, results, mtx, condition);
-    io_context.run();
-  }, &sendersCount, &pingResults_, &mtx_, &condition_);
+  std::thread t(createReceiver(), &sendersCount, &pingResults_, &mtx_, &condition_);
   // Starting ICMP senders
   for (size_t i = 0; i < addressList_.size(); i++) {
-    std::thread t([](std::string address, int *senders, std::mutex *mtx, std::condition_variable *condition, OptionsLosshd *options){
-      std::unique_lock<std::mutex> ul(*mtx);
-      // Waiting for receiver starts
-      condition->wait(ul);
-      mtx->unlock();
-      boost::asio::io_context io_context;
-      IcmpSender pinger(io_context, address.c_str(), options->getCount(), options->getInterval(), mtx, condition);
-      mtx->lock();
-      (*senders)--;
-      mtx->unlock();
-    }, addressList_.at(i), &sendersCount, &mtx_, &condition_, options_);
+    std::thread t(createSender(), addressList_.at(i), &sendersCount, &mtx_, &condition_, options_);
     threads.push_back(std::move(t));
   }
   // Joining senders

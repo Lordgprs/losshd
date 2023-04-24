@@ -1,9 +1,19 @@
 #ifndef LOSSHD_MAIN_H
 #define LOSSHD_MAIN_H
 
-#include <istream>
 #include <algorithm>
+#include <istream>
+#include <iostream>
+#include <ostream>
+#include <thread>
+#include <unordered_map>
+
+#include <pqxx/pqxx>
+#include <boost/asio.hpp>
+#include <boost/bind/bind.hpp>
+#include <boost/program_options.hpp>
 #include <boost/asio/ip/address_v4.hpp>
+#include "options.h"
 
 using boost::asio::ip::icmp;
 using boost::asio::steady_timer;
@@ -186,6 +196,8 @@ public:
 private:
   std::string get_ip_from_uint32 (const uint32_t ip) const;
   std::vector<std::string> get_addresses_for_ping() const;
+  auto createReceiver(); 
+  auto createSender(); 
   
   OptionsLosshd *options_;
   pqxx::connection conn_;

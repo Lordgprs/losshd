@@ -1,6 +1,3 @@
-#include <iostream>
-#include <pqxx/pqxx>
-#include <boost/program_options.hpp>
 #include "getloss.h"
 
 OptionsGetloss::OptionsGetloss(int argc, char *argv[]) :
