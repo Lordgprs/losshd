@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/max/cpp-projects/losshd-1.0.1
+CMAKE_SOURCE_DIR = /home/max/cpp-projects/losshd-1.0.2
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/max/cpp-projects/losshd-1.0.1/build
+CMAKE_BINARY_DIR = /home/max/cpp-projects/losshd-1.0.2/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/getloss.dir/depend.make
@@ -72,30 +72,30 @@ include CMakeFiles/getloss.dir/flags.make
 CMakeFiles/getloss.dir/src/getloss.cpp.o: CMakeFiles/getloss.dir/flags.make
 CMakeFiles/getloss.dir/src/getloss.cpp.o: ../src/getloss.cpp
 CMakeFiles/getloss.dir/src/getloss.cpp.o: CMakeFiles/getloss.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/max/cpp-projects/losshd-1.0.1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/getloss.dir/src/getloss.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/getloss.dir/src/getloss.cpp.o -MF CMakeFiles/getloss.dir/src/getloss.cpp.o.d -o CMakeFiles/getloss.dir/src/getloss.cpp.o -c /home/max/cpp-projects/losshd-1.0.1/src/getloss.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/max/cpp-projects/losshd-1.0.2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/getloss.dir/src/getloss.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/getloss.dir/src/getloss.cpp.o -MF CMakeFiles/getloss.dir/src/getloss.cpp.o.d -o CMakeFiles/getloss.dir/src/getloss.cpp.o -c /home/max/cpp-projects/losshd-1.0.2/src/getloss.cpp
 
 CMakeFiles/getloss.dir/src/getloss.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/getloss.dir/src/getloss.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/max/cpp-projects/losshd-1.0.1/src/getloss.cpp > CMakeFiles/getloss.dir/src/getloss.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/max/cpp-projects/losshd-1.0.2/src/getloss.cpp > CMakeFiles/getloss.dir/src/getloss.cpp.i
 
 CMakeFiles/getloss.dir/src/getloss.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/getloss.dir/src/getloss.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/max/cpp-projects/losshd-1.0.1/src/getloss.cpp -o CMakeFiles/getloss.dir/src/getloss.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/max/cpp-projects/losshd-1.0.2/src/getloss.cpp -o CMakeFiles/getloss.dir/src/getloss.cpp.s
 
 CMakeFiles/getloss.dir/src/options.cpp.o: CMakeFiles/getloss.dir/flags.make
 CMakeFiles/getloss.dir/src/options.cpp.o: ../src/options.cpp
 CMakeFiles/getloss.dir/src/options.cpp.o: CMakeFiles/getloss.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/max/cpp-projects/losshd-1.0.1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/getloss.dir/src/options.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/getloss.dir/src/options.cpp.o -MF CMakeFiles/getloss.dir/src/options.cpp.o.d -o CMakeFiles/getloss.dir/src/options.cpp.o -c /home/max/cpp-projects/losshd-1.0.1/src/options.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/max/cpp-projects/losshd-1.0.2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/getloss.dir/src/options.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/getloss.dir/src/options.cpp.o -MF CMakeFiles/getloss.dir/src/options.cpp.o.d -o CMakeFiles/getloss.dir/src/options.cpp.o -c /home/max/cpp-projects/losshd-1.0.2/src/options.cpp
 
 CMakeFiles/getloss.dir/src/options.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/getloss.dir/src/options.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/max/cpp-projects/losshd-1.0.1/src/options.cpp > CMakeFiles/getloss.dir/src/options.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/max/cpp-projects/losshd-1.0.2/src/options.cpp > CMakeFiles/getloss.dir/src/options.cpp.i
 
 CMakeFiles/getloss.dir/src/options.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/getloss.dir/src/options.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/max/cpp-projects/losshd-1.0.1/src/options.cpp -o CMakeFiles/getloss.dir/src/options.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/max/cpp-projects/losshd-1.0.2/src/options.cpp -o CMakeFiles/getloss.dir/src/options.cpp.s
 
 # Object files for target getloss
 getloss_OBJECTS = \
@@ -109,7 +109,7 @@ getloss: CMakeFiles/getloss.dir/src/getloss.cpp.o
 getloss: CMakeFiles/getloss.dir/src/options.cpp.o
 getloss: CMakeFiles/getloss.dir/build.make
 getloss: CMakeFiles/getloss.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/max/cpp-projects/losshd-1.0.1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable getloss"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/max/cpp-projects/losshd-1.0.2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable getloss"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/getloss.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -121,6 +121,6 @@ CMakeFiles/getloss.dir/clean:
 .PHONY : CMakeFiles/getloss.dir/clean
 
 CMakeFiles/getloss.dir/depend:
-	cd /home/max/cpp-projects/losshd-1.0.1/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/max/cpp-projects/losshd-1.0.1 /home/max/cpp-projects/losshd-1.0.1 /home/max/cpp-projects/losshd-1.0.1/build /home/max/cpp-projects/losshd-1.0.1/build /home/max/cpp-projects/losshd-1.0.1/build/CMakeFiles/getloss.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/max/cpp-projects/losshd-1.0.2/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/max/cpp-projects/losshd-1.0.2 /home/max/cpp-projects/losshd-1.0.2 /home/max/cpp-projects/losshd-1.0.2/build /home/max/cpp-projects/losshd-1.0.2/build /home/max/cpp-projects/losshd-1.0.2/build/CMakeFiles/getloss.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/getloss.dir/depend
 

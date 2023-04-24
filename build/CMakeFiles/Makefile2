@@ -54,10 +54,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/max/cpp-projects/losshd-1.0.1
+CMAKE_SOURCE_DIR = /home/max/cpp-projects/losshd-1.0.2
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/max/cpp-projects/losshd-1.0.1/build
+CMAKE_BINARY_DIR = /home/max/cpp-projects/losshd-1.0.2/build
 
 #=============================================================================
 # Directory level rules for the build root directory
@@ -83,14 +83,14 @@ clean: CMakeFiles/getloss.dir/clean
 CMakeFiles/losshd.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/losshd.dir/build.make CMakeFiles/losshd.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/losshd.dir/build.make CMakeFiles/losshd.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/max/cpp-projects/losshd-1.0.1/build/CMakeFiles --progress-num=4,5,6 "Built target losshd"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/max/cpp-projects/losshd-1.0.2/build/CMakeFiles --progress-num=4,5,6 "Built target losshd"
 .PHONY : CMakeFiles/losshd.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/losshd.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/max/cpp-projects/losshd-1.0.1/build/CMakeFiles 3
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/max/cpp-projects/losshd-1.0.2/build/CMakeFiles 3
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/losshd.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/max/cpp-projects/losshd-1.0.1/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/max/cpp-projects/losshd-1.0.2/build/CMakeFiles 0
 .PHONY : CMakeFiles/losshd.dir/rule
 
 # Convenience name for target.
@@ -109,14 +109,14 @@ CMakeFiles/losshd.dir/clean:
 CMakeFiles/getloss.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/getloss.dir/build.make CMakeFiles/getloss.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/getloss.dir/build.make CMakeFiles/getloss.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/max/cpp-projects/losshd-1.0.1/build/CMakeFiles --progress-num=1,2,3 "Built target getloss"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/max/cpp-projects/losshd-1.0.2/build/CMakeFiles --progress-num=1,2,3 "Built target getloss"
 .PHONY : CMakeFiles/getloss.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/getloss.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/max/cpp-projects/losshd-1.0.1/build/CMakeFiles 3
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/max/cpp-projects/losshd-1.0.2/build/CMakeFiles 3
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/getloss.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/max/cpp-projects/losshd-1.0.1/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/max/cpp-projects/losshd-1.0.2/build/CMakeFiles 0
 .PHONY : CMakeFiles/getloss.dir/rule
 
 # Convenience name for target.
