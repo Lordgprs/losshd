@@ -6,5 +6,5 @@ CXX_DEFINES =
 
 CXX_INCLUDES = 
 
-CXX_FLAGS = -O3 -O3 -DNDEBUG -std=c++20
+CXX_FLAGS = -O2 -O3 -DNDEBUG -std=c++20
 

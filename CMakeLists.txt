@@ -1,7 +1,7 @@
 cmake_policy(SET CMP0048 NEW)
 project(LossHD VERSION 1.0.1)
 cmake_minimum_required(VERSION 3.18)
-set(CMAKE_CXX_FLAGS "-O3")
+set(CMAKE_CXX_FLAGS "-O2")
 find_package(Boost REQUIRED COMPONENTS program_options REQUIRED)
 find_package(libpqxx REQUIRED)
 add_executable(losshd losshd.cpp options.cpp)
