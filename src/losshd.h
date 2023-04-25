@@ -61,6 +61,7 @@ public:
   void checksum(uint16_t);
   void identifier(uint16_t);
   void sequence_number(uint16_t);
+  void CalculateChecksum(auto body_begin, auto body_end); 
   friend std::istream& operator>>(std::istream &inputStream, Icmp &header);
   friend std::ostream& operator<<(std::ostream &outputStream, const Icmp &header);
 
@@ -72,38 +73,10 @@ private:
     data_[a] = static_cast<char8_t>(n >> 8);
     data_[b] = static_cast<char8_t>(n & 0xFF);
   }
-  
+
   char8_t data_[8];
 };
 
-/*template <typename T>
-void CalculateChecksum(Icmp &header, T body_begin, T body_end) {
-  uint32_t sum = (header.type() << 8) + header.code() + header.identifier() + header.sequence_number();
-  T body_iterator = body_begin;
-  while (body_iterator != body_end) {
-    sum += (static_cast<char8_t>(*body_iterator++) << 8);
-    if (body_iterator != body_end)
-      sum += static_cast<char8_t>(*body_iterator++);
-  }
-  
-  sum = (sum >> 16) + (sum & 0xFFFF);
-  sum += (sum >> 16);
-  header.checksum(static_cast<uint16_t>(~sum));
-}*/
-
-void CalculateChecksum(Icmp &header, auto body_begin, auto body_end) {
-  uint32_t sum = (header.type() << 8) + header.code() + header.identifier() + header.sequence_number();
-  auto body_iterator = body_begin;
-  while (body_iterator != body_end) {
-    sum += (static_cast<char8_t>(*body_iterator++) << 8);
-    if (body_iterator != body_end)
-      sum += static_cast<char8_t>(*body_iterator++);
-  }
-  
-  sum = (sum >> 16) + (sum & 0xFFFF);
-  sum += (sum >> 16);
-  header.checksum(static_cast<uint16_t>(~sum));
-}
 
 class IcmpSender {
 public:

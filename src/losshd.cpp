@@ -71,6 +71,19 @@ void Icmp::sequence_number(uint16_t n) {
   Encode(6, 7, n);
 }
 
+void Icmp::CalculateChecksum(auto body_begin, auto body_end) {
+  uint32_t sum = (type() << 8) + code() + identifier() + sequence_number();
+  auto body_iterator = body_begin;
+  while (body_iterator != body_end) {
+    sum += (static_cast<char8_t>(*body_iterator++) << 8);
+    if (body_iterator != body_end)
+      sum += static_cast<char8_t>(*body_iterator++);
+  }
+  
+  sum = (sum >> 16) + (sum & 0xFFFF);
+  sum += (sum >> 16);
+  checksum(static_cast<uint16_t>(~sum));
+}
 std::istream& operator>>(std::istream& input_stream, Icmp &header) {
   return input_stream.read(reinterpret_cast<char *>(header.data_), 8);
 }
@@ -118,7 +131,7 @@ void IcmpSender::StartSend() {
   icmp.identifier(static_cast<uint16_t>(getpid()));
   for (size_t i = 0; i < count_; i++) {
     icmp.sequence_number(++sequence_number_);
-    CalculateChecksum(icmp, body.begin(), body.end());
+    icmp.CalculateChecksum(body.begin(), body.end());
     // Encode the request packet
     boost::asio::streambuf requestBuffer;
     std::ostream outputStream(&requestBuffer);
@@ -180,7 +193,7 @@ void IcmpReceiver::HandleReceive(std::size_t length) {
   Icmp icmp;
   input_stream >> ipv4 >> icmp;
   if (input_stream && icmp.type() == Icmp::kEchoReply
-  && icmp.identifier() == getpid()) {
+  && icmp.identifier() == static_cast<uint16_t>(getpid())) {
     dt_.cancel();
     uint32_t src = ipv4.source_address_uint32();
     mtx_.lock();
@@ -336,7 +349,7 @@ void Scheduler::Run() {
         loss = " + std::to_string(static_cast<double>(options_.get_count() - i.second) / options_.get_count() * 100) + ", " + " \
         last_update = NOW() \
         WHERE \
-        ip = '" + GetIpFromUint32(i.first) + "'");
+        ip = '" + GetIpFromUint32(i.first) + "'"); 
   }
   std::cout << std::endl;
 }
