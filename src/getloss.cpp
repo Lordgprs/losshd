@@ -12,10 +12,10 @@ Options(argc, argv) {
   po::store(po::parse_command_line(argc, argv, desc_), vm_);
   po::notify(vm_);
   
-  check_options();
+  CheckOptions();
 }
 
-void OptionsGetloss::check_options() {
+void OptionsGetloss::CheckOptions() {
   if (vm_.count("help") != 0) {
     std::cout << desc_ << std::endl;
     std::exit(EXIT_SUCCESS);
@@ -32,34 +32,34 @@ void OptionsGetloss::check_options() {
   }
 }
 
-std::string OptionsGetloss::getDbname() const {
+std::string OptionsGetloss::get_dbname() const {
   return vm_.at("dbname").as<std::string>();
 }
 
-std::string OptionsGetloss::getDbhost() const {
+std::string OptionsGetloss::get_dbhost() const {
   return vm_.at("dbhost").as<std::string>();
 }
 
-std::string OptionsGetloss::getDbuser() const {
+std::string OptionsGetloss::get_dbuser() const {
   return vm_.at("dbuser").as<std::string>();
 }
 
-std::string OptionsGetloss::getDbpass() const {
+std::string OptionsGetloss::get_dbpass() const {
   return vm_.at("dbpass").as<std::string>();
 }
 
-std::string OptionsGetloss::getAddress() const {
+std::string OptionsGetloss::get_address() const {
   return vm_.at("address").as<std::string>();
 }
 
 Database::Database(const OptionsGetloss &options):
-conn_("dbname=" + options.getDbname() + " user=" + options.getDbuser() + " password=" + options.getDbpass() + " hostaddr=" + options.getDbhost()), txn_(conn_) {
+conn_("dbname=" + options.get_dbname() + " user=" + options.get_dbuser() + " password=" + options.get_dbpass() + " hostaddr=" + options.get_dbhost()), txn_(conn_) {
   
 }
 Database::~Database() {
   txn_.commit();
 }
-double Database::getLoss(const std::string &ip) const {
+double Database::get_loss(const std::string &ip) const {
   double loss = 0;
   std::string req = "SELECT loss FROM ext_packetlosshd_dbg WHERE ip = '" + ip + "'";
   auto result = txn_.exec(req);
@@ -75,6 +75,6 @@ double Database::getLoss(const std::string &ip) const {
 int main(int argc, char **argv) {
   OptionsGetloss options(argc, argv);
   Database db(options);
-  std::cout << db.getLoss(options.getAddress()) << std::endl;
+  std::cout << db.get_loss(options.get_address()) << std::endl;
   return EXIT_SUCCESS;
 }

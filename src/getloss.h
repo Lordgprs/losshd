@@ -14,12 +14,12 @@ public:
   OptionsGetloss & operator=(const OptionsGetloss &) = delete;
   OptionsGetloss & operator=(const OptionsGetloss &&) = delete;
   OptionsGetloss(int argc, char **argv);
-  void check_options();
-  std::string getDbname() const;
-  std::string getDbhost() const;
-  std::string getDbuser() const;
-  std::string getDbpass() const;
-  std::string getAddress() const;
+  void CheckOptions();
+  std::string get_dbname() const;
+  std::string get_dbhost() const;
+  std::string get_dbuser() const;
+  std::string get_dbpass() const;
+  std::string get_address() const;
 };
 
 class Database {
@@ -27,7 +27,7 @@ public:
   Database() = delete;
   Database(const OptionsGetloss &);
   ~Database();
-  double getLoss(const std::string &) const;
+  double get_loss(const std::string &) const;
 private:
   pqxx::connection conn_;
   pqxx::work mutable txn_;

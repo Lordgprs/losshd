@@ -4,6 +4,6 @@
         "conan": {}
     },
     "include": [
-        "/home/max/cpp-projects/losshd-1.0.1/conan/CMakePresets.json"
+        "/home/max/cpp-projects/losshd-1.0.3/conan/CMakePresets.json"
     ]
 }
