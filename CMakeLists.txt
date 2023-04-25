@@ -1,5 +1,5 @@
 cmake_policy(SET CMP0048 NEW)
-project(LossHD VERSION 1.0.2)
+project(LossHD VERSION 1.0.3)
 cmake_minimum_required(VERSION 3.18)
 set(CMAKE_CXX_FLAGS "-O2")
 find_package(Boost REQUIRED COMPONENTS program_options REQUIRED)
