@@ -86,7 +86,6 @@ public:
   IcmpSender & operator=(const IcmpSender &) = delete;
   IcmpSender & operator=(const IcmpSender &&) = delete;
   IcmpSender(boost::asio::io_context &, const char *, uint16_t, uint16_t, std::mutex &, std::condition_variable &);
-  uint16_t sent() const;
 
 private:
   void StartSend();
@@ -97,7 +96,6 @@ private:
   uint16_t count_;
   chrono::steady_clock::time_point time_sent_;
   boost::asio::streambuf reply_buffer_;
-  std::size_t requests_count_;
   std::size_t interval_;
   std::size_t size_;
   std::mutex &mtx_;

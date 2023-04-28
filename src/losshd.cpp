@@ -106,7 +106,6 @@ std::istream &operator>>(std::istream &is, Ipv4 &header) {
 
 IcmpSender::IcmpSender(boost::asio::io_context &io_context, const char *destination, uint16_t count, uint16_t interval, std::mutex &mtx, std::condition_variable &condition):
   sequence_number_(0),
-  requests_count_(1),
   interval_(interval),
   size_(1400),
   count_(count),
@@ -116,10 +115,6 @@ IcmpSender::IcmpSender(boost::asio::io_context &io_context, const char *destinat
 
   destination_ =  icmp::endpoint(boost::asio::ip::address::from_string(destination), 0);
   StartSend();
-}
-
-uint16_t IcmpSender::sent() const {
-  return requests_count_;
 }
 
 void IcmpSender::StartSend() {
@@ -163,18 +158,21 @@ void IcmpReceiver::StartReceive() {
     dt_.async_wait(boost::bind(&IcmpReceiver::CheckIfSendersExist, this));
   }
   if (!senders_unlocked_) {
-    std::unique_lock<std::mutex> ul(mtx_);
-    // Notifying senders: we are ready to catch echo replies
-    condition_.notify_all();
-    mtx_.unlock();
+    {
+      std::unique_lock<std::mutex> ul(mtx_);
+      // Notifying senders: we are ready to catch echo replies
+      condition_.notify_all();
+    }
     senders_unlocked_ = true;
   }
 }
 
 void IcmpReceiver::CheckIfSendersExist() {
-  std::unique_lock<std::mutex> ul(mtx_);
-  auto count = senders_count_;
-  mtx_.unlock();
+  int count;
+  {
+    std::unique_lock<std::mutex> ul(mtx_);
+    count = senders_count_;
+  }
   // Stopping catching replies if all senders have been finished
   if (count == 0) {
     dt_.cancel();
@@ -183,8 +181,6 @@ void IcmpReceiver::CheckIfSendersExist() {
 }
 
 void IcmpReceiver::HandleReceive(std::size_t length) {
-  std::unique_lock<std::mutex> ul(mtx_);
-  mtx_.unlock();
   reply_buffer_.commit(length);
   
   // Decode the reply packet
@@ -196,15 +192,16 @@ void IcmpReceiver::HandleReceive(std::size_t length) {
   && icmp.identifier() == static_cast<uint16_t>(getpid())) {
     dt_.cancel();
     uint32_t src = ipv4.source_address_uint32();
-    mtx_.lock();
-    ping_results_[src]++;
-    mtx_.unlock();
+    {
+      std::lock_guard lg(mtx_);
+      ping_results_[src]++;
+    }
   }
-  mtx_.lock();
-  if(senders_count_ > 0) {
-    StartReceive();
+  {
+    std::lock_guard lg(mtx_);
+    if(senders_count_ > 0)
+      StartReceive();
   }
-  mtx_.unlock();
 }
 
 OptionsLosshd::OptionsLosshd (int argc, char *argv[]):
@@ -314,16 +311,18 @@ auto Scheduler::CreateReceiver() {
 }
 
 auto Scheduler::CreateSender() {
-  return [](std::string address, int &senders, std::mutex &mtx, std::condition_variable &condition, OptionsLosshd &options){
-    std::unique_lock<std::mutex> ul(mtx);
-    // Waiting for receiver starts
-    condition.wait(ul);
-    mtx.unlock();
+  return [](std::string address, int &senders, std::mutex &mtx, std::condition_variable &condition, OptionsLosshd &options) {
+    {
+      std::unique_lock<std::mutex> ul(mtx);
+      // Waiting for receiver starts
+      condition.wait(ul);
+    }
     boost::asio::io_context io_context;
     IcmpSender pinger(io_context, address.c_str(), options.get_count(), options.get_interval(), mtx, condition);
-    mtx.lock();
-    senders--;
-    mtx.unlock();
+    {
+      std::lock_guard lg(mtx);
+      senders--;
+    }
   };
 }
 
