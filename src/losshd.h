@@ -66,13 +66,8 @@ public:
   friend std::ostream& operator<<(std::ostream &outputStream, const Icmp &header);
 
 private:
-  uint16_t Decode(int32_t a, int32_t b) const {
-    return (data_[a] << 8) + data_[b];
-  }
-  void Encode(int32_t a, int32_t b, uint16_t n) {
-    data_[a] = static_cast<char8_t>(n >> 8);
-    data_[b] = static_cast<char8_t>(n & 0xFF);
-  }
+  uint16_t Decode(int32_t a, int32_t b) const;
+  void Encode(int32_t a, int32_t b, uint16_t n);
 
   char8_t data_[8];
 };

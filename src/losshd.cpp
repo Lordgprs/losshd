@@ -31,6 +31,15 @@ uint32_t Ipv4::source_address_uint32() const {
   return (data_[12] << 24) | (data_[13] << 16) | (data_[14] << 8) | data_[15];
 }
 
+uint16_t Icmp::Decode(const int32_t a, const int32_t b) const {
+  return (data_[a] << 8) + data_[b];
+}
+
+void Icmp::Encode(const int32_t a, const int32_t b, const uint16_t n) {
+  data_[a] = static_cast<char8_t>(n >> 8);
+  data_[b] = static_cast<char8_t>(n & 0xFF);
+}
+
 Icmp::Icmp() {
   std::fill(data_, data_ + sizeof(data_), 0);
 }
