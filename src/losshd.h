@@ -89,8 +89,6 @@ private:
   icmp::socket socket_;
   uint16_t sequence_number_;
   uint16_t count_;
-  chrono::steady_clock::time_point time_sent_;
-  boost::asio::streambuf reply_buffer_;
   std::size_t interval_;
   std::size_t size_;
   std::mutex &mtx_;
@@ -112,7 +110,6 @@ private:
   void HandleReceive(std::size_t length);
   
   icmp::socket socket_;
-  chrono::steady_clock::time_point time_sent_;
   boost::asio::streambuf reply_buffer_;
   int &senders_count_;
   std::unordered_map<uint32_t, uint32_t> &ping_results_;

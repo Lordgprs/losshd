@@ -31,15 +31,6 @@ uint32_t Ipv4::source_address_uint32() const {
   return (data_[12] << 24) | (data_[13] << 16) | (data_[14] << 8) | data_[15];
 }
 
-uint16_t Icmp::Decode(const int32_t a, const int32_t b) const {
-  return (data_[a] << 8) + data_[b];
-}
-
-void Icmp::Encode(const int32_t a, const int32_t b, const uint16_t n) {
-  data_[a] = static_cast<char8_t>(n >> 8);
-  data_[b] = static_cast<char8_t>(n & 0xFF);
-}
-
 Icmp::Icmp() {
   std::fill(data_, data_ + sizeof(data_), 0);
 }
@@ -93,6 +84,16 @@ void Icmp::CalculateChecksum(auto body_begin, auto body_end) {
   sum += (sum >> 16);
   checksum(static_cast<uint16_t>(~sum));
 }
+
+uint16_t Icmp::Decode(const int32_t a, const int32_t b) const {
+  return (data_[a] << 8) + data_[b];
+}
+
+void Icmp::Encode(const int32_t a, const int32_t b, const uint16_t n) {
+  data_[a] = static_cast<char8_t>(n >> 8);
+  data_[b] = static_cast<char8_t>(n & 0xFF);
+}
+
 std::istream& operator>>(std::istream& input_stream, Icmp &header) {
   return input_stream.read(reinterpret_cast<char *>(header.data_), 8);
 }
@@ -142,7 +143,6 @@ void IcmpSender::StartSend() {
     outputStream << icmp << body;
   
     // Send the request
-    time_sent_ = steady_timer::clock_type::now();
     socket_.send_to(requestBuffer.data(), destination_);
     std::this_thread::sleep_for(std::chrono::milliseconds(interval_));
   } 
