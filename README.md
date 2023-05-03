@@ -1,7 +1,7 @@
 # losshd
 Zabbix external check for very low packet loss monitoring
 
-Description in Russian: [go to habr.ru](https://habr.com/ru/articles/732922/)
+Description in Russian: [https://habr.com/ru/articles/732922/](https://habr.com/ru/articles/732922/)
 
 Build:
 
